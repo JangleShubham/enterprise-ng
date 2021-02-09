@@ -7,6 +7,7 @@ import { Asset } from './asset';
 import { SohoToastService } from 'ids-enterprise-ng';
 
 import {
+  appInstanceData,
   checkboxColumn,
   productsColumns,
   productsData
@@ -28,6 +29,23 @@ export class LookupDemoComponent implements OnInit {
 
   public columns_product?: SohoDataGridColumn[];
   public columns_multi?: SohoDataGridColumn[];
+  public dataGridColumns?: SohoDataGridColumn[];
+  public dataGridColumnsForAppInstance: SohoDataGridColumn[] = [
+    {
+      id: 'selectionCheckbox', sortable: false, resizable: false, width: 40,
+      formatter: Soho.Formatters.SelectionCheckbox, align: 'center'
+    },
+    { id: 'pa.application_guid', field: 'applicationInstanceGuid', hidden: true },
+    { id: 'pa.id', field: 'id', hidden: true },
+    {
+      id: 'pa.application_name', name: 'Application Instance Name', sortable: true, field: 'applicationInstanceName', width: 250,
+      filterType: 'text', filterConditions: ['contains', 'equals']
+    },
+    {
+      id: 'apt.application_name', name: 'Application', sortable: true, field: 'applicationType', width: 250,
+      filterType: 'text', filterConditions: ['contains', 'equals']
+    }
+  ];
   public entityIds?: string;
   public data_product?: any[];
   public customButtons: SohoModalButton[] = [
@@ -55,6 +73,7 @@ export class LookupDemoComponent implements OnInit {
     { text: 'Cancel', click: () => this.sohoLookupRef?.modal?.close() },
     { text: 'Submit', click: () => this.sohoLookupRef?.modal?.close(), isDefault: true }
   ];
+  selectedNodeList: any[] = [];
   public model: any = {
     single: null,
     singleexists: '1212121',
@@ -99,6 +118,10 @@ export class LookupDemoComponent implements OnInit {
   };
   public showModel = false;
   public templates?: Array<Asset>;
+  options: any;
+  fieldName: string = 'productName';
+  fieldNameAppInstance: string = 'applicationInstanceName';
+  displayNodeList: any[] = [];
 
   // So we can bind 'this' to the source function passed to the lookup control
   public context = this;
@@ -108,6 +131,7 @@ export class LookupDemoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.options = { allowSelectAcrossPages: true, paging: true, columnIds: [this.fieldName], pagesize: 10, pagesizes: [10, 25, 50, 100], disableClientSort: false, disableClientFilter: false, filterable: true }
     const lookupOptions = {
       columns: this.getAssetColumns(),
       sortable: false,
@@ -166,6 +190,40 @@ export class LookupDemoComponent implements OnInit {
     return sohoGridColumns;
   }
 
+  requestDataAppInstance(filter?: string, page?: number, pagesize?: number): Promise<FakeResponse> {
+    // This acts as a fake response from the server, therefore all computations
+    // would be done server-side
+    return new Promise((resolve) => {
+      let dataResult = appInstanceData.dataList;
+
+      if (filter) {
+        // Server filtering
+        dataResult = appInstanceData.dataList.filter(data => {
+          return data.applicationInstanceName.toString().includes(filter) ||
+            data.applicationInstanceName.toLowerCase().includes(filter);
+        });
+      }
+
+      // Server supports paging
+      if (!page || !pagesize) {
+        return;
+      }
+
+      const startIndex = (page - 1) * pagesize;
+      const endIndex = page * pagesize;
+      dataResult = dataResult.slice(startIndex, endIndex);
+
+      // Set a timeout to simulate time for server to respond
+      setTimeout(() => {
+        resolve({
+          response: 200,
+          total: appInstanceData.dataList.length,
+          data: dataResult
+        });
+      }, 1000);
+    });
+  }
+
   requestData(filter?: string, page?: number, pagesize?: number): Promise<FakeResponse> {
     // This acts as a fake response from the server, therefore all computations
     // would be done server-side
@@ -219,6 +277,7 @@ export class LookupDemoComponent implements OnInit {
       this.columns_multi?.push(column);
     });
 
+    this.dataGridColumns = this.columns_multi;
   }
 
   toggleModel() {
@@ -234,6 +293,14 @@ export class LookupDemoComponent implements OnInit {
   source(req: SohoDataGridSourceRequest, response: SohoDataGridResponseFunction) {
     const filter = req.filterExpr && req.filterExpr[0] && req.filterExpr[0].value;
     this.requestData(filter, req.activePage, req.pagesize).then(result => {
+      req.total = result.total;
+      response(result.data, req);
+    });
+  }
+
+  sourceAppInstance(req: SohoDataGridSourceRequest, response: SohoDataGridResponseFunction) {
+    const filter = req.filterExpr && req.filterExpr[0] && req.filterExpr[0].value;
+    this.requestDataAppInstance(filter, req.activePage, req.pagesize).then(result => {
       req.total = result.total;
       response(result.data, req);
     });
@@ -259,8 +326,10 @@ export class LookupDemoComponent implements OnInit {
 
   // Example of custom displaying
   onField = (row: any, field: any, grid: any) => {
-    console.log(row, field, grid, this);
-    return row.productId + '|' + row.productName;
+    if (row && row.productId) {
+      console.log(row, field, grid, this);
+      return row.productId + '|' + row.productName;
+    }
   }
 
   // Example of custom matching
@@ -271,9 +340,11 @@ export class LookupDemoComponent implements OnInit {
 
   onDirty(event: SohoTrackDirtyEvent) {
     console.log('lookup.onDirty', event);
+    console.log(this.selectedNodeList);
   }
 
   onPristine(event: SohoTrackDirtyEvent) {
+    console.log(this.selectedNodeList);
     console.log('lookup.onPristine', event);
   }
 
@@ -287,5 +358,17 @@ export class LookupDemoComponent implements OnInit {
 
   onBeforeOpen(event: any) {
     console.log('lookup.onbeforeopen', event);
+  }
+
+  onClose() {
+    this.displayNodeList = this.selectedNodeList;
+    console.log(typeof this.selectedNodeList);
+    console.log('this.selectedNodeList');
+    console.log(this.selectedNodeList);
+  }
+
+  delSelectedTree(fieldValue: string) {
+    this.displayNodeList = this.displayNodeList.filter(item => item[this.fieldNameAppInstance] !== fieldValue);
+    this.selectedNodeList = this.displayNodeList;
   }
 }

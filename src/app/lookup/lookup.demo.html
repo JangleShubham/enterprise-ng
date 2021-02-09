@@ -1,77 +1,52 @@
-<form>
-  <div class="row top-padding">
-    <div class="row">
-      <div class="six columns">
-        <div class="field">
-          <label soho-label for="product_single">Products (Single Select) with mask</label>
-          <input soho-lookup
-            soho-mask [sohoPattern]="'#######'" [process]="'number'" [allowNegative]="false"
-            soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
-            [(ngModel)]="model.single"
-            [columns]="columns_product"
-            [dataset]="data_product"
-            (change)="onChange($event)"
-            (afteropen)="onAfterOpen($event)"
-            field="productId"
-            title="Products"
-            name="product_single" />
-        </div>
+<!-- <form> -->
+<div class="row top-padding">
+  <div class="row">
+    <div class="six columns">
+      <div class="field">
+        <label soho-label for="product_single">Products (Single Select) with mask</label>
+        <input soho-lookup soho-mask [sohoPattern]="'#######'" [process]="'number'" [allowNegative]="false"
+          soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)" [(ngModel)]="model.single"
+          [columns]="columns_product" [dataset]="data_product" (change)="onChange($event)"
+          (afteropen)="onAfterOpen($event)" field="productId" title="Products" name="product_single" />
       </div>
-      <div class="six columns">
-        <div class="field">
-          <label soho-label for="product_single_exists">Products (Single Select) with mask with existing value</label>
-          <input soho-lookup
-            soho-mask [sohoPattern]="'#######'" [process]="'number'" [allowNegative]="false"
-            soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
-            [(ngModel)]="model.singleexists"
-            [columns]="columns_product"
-            [dataset]="data_product"
-            field="productId"
-            name="product_single_exists" />
-        </div>
+    </div>
+    <div class="six columns">
+      <div class="field">
+        <label soho-label for="product_single_exists">Products (Single Select) with mask with existing value</label>
+        <input soho-lookup soho-mask [sohoPattern]="'#######'" [process]="'number'" [allowNegative]="false"
+          soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)" [(ngModel)]="model.singleexists"
+          [columns]="columns_product" [dataset]="data_product" field="productId" name="product_single_exists" />
       </div>
+    </div>
 
-    </div>
-    <div class="row">
-      <div class="six columns">
-        <div class="field">
-          <label soho-label for="product_single_object">Products (Single Select Stored as Object) with mask</label>
-          <input soho-lookup
-            soho-mask [sohoPattern]="'#######'" [process]="'number'" [allowNegative]="false"
-            soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
-            [(ngModel)]="model.singleobject"
-            [columns]="columns_product"
-            [dataset]="data_product"
-            field="productId"
-            name="product_single_object" />
-        </div>
-      </div>
-      <div class="six columns">
-        <div class="field">
-          <label soho-label for="product_single_object_exists">Products (Single Select Stored as Object) with mask with existing value</label>
-          <input soho-lookup
-            soho-mask [sohoPattern]="'#######'" [process]="'number'" [allowNegative]="false"
-            soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
-            [(ngModel)]="model.singleobjectexists"
-            [columns]="columns_product"
-            [dataset]="data_product"
-            field="productId"
-            name="product_single_object_exists" />
-        </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      <div class="field">
+        <label soho-label for="product_single_object">Products (Single Select Stored as Object) with mask</label>
+        <input soho-lookup soho-mask [sohoPattern]="'#######'" [process]="'number'" [allowNegative]="false"
+          soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)" [(ngModel)]="model.singleobject"
+          [columns]="columns_product" [dataset]="data_product" field="productId" name="product_single_object" />
       </div>
     </div>
-    <div class="row">
-      <div class="six columns">
-        <div class="field">
-          <label soho-label for="product_multi">Products (Multi Select)</label>
-          <input soho-lookup
-            soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
-            [(ngModel)]="model.multi"
-            [columns]="columns_multi"
-            [dataset]="data_product"
-            (change)="onChange($event)"
-            multiselect
-            [toolbar]="{
+    <div class="six columns">
+      <div class="field">
+        <label soho-label for="product_single_object_exists">Products (Single Select Stored as Object) with mask with
+          existing value</label>
+        <input soho-lookup soho-mask [sohoPattern]="'#######'" [process]="'number'" [allowNegative]="false"
+          soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
+          [(ngModel)]="model.singleobjectexists" [columns]="columns_product" [dataset]="data_product" field="productId"
+          name="product_single_object_exists" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      <div class="field">
+        <label soho-label for="product_multi">Products (Multi Select)</label>
+        <input soho-lookup soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
+          [(ngModel)]="model.multi" [columns]="columns_multi" [dataset]="data_product" (change)="onChange($event)"
+          multiselect [toolbar]="{
           results: true,
           dateFilter: false,
           keywordFilter: true,
@@ -81,21 +56,14 @@
           rowHeight: false,
           collapsibleFilter: false,
           fullWidth: true
-        }"
-            field="productId"
-            name="product_multi"/>
-        </div>
+        }" field="productId" name="product_multi" />
       </div>
-      <div class="six columns">
-        <div class="field">
-          <label soho-label for="product_multi_exists">Products (Multi Select) with existing value</label>
-          <input soho-lookup
-            soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
-            [(ngModel)]="model.multiexists"
-            [columns]="columns_multi"
-            [dataset]="data_product"
-            multiselect
-            [toolbar]="{
+    </div>
+    <div class="six columns">
+      <div class="field">
+        <label soho-label for="product_multi_exists">Products (Multi Select) with existing value</label>
+        <input soho-lookup soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
+          [(ngModel)]="model.multiexists" [columns]="columns_multi" [dataset]="data_product" multiselect [toolbar]="{
           results: true,
           dateFilter: false,
           keywordFilter: true,
@@ -105,23 +73,16 @@
           rowHeight: false,
           collapsibleFilter: false,
           fullWidth: true
-        }"
-            field="productId"
-            name="product_multi_exists"/>
-        </div>
+        }" field="productId" name="product_multi_exists" />
       </div>
     </div>
-    <div class="row">
-      <div class="six columns">
-        <div class="field">
-          <label soho-label for="product_multi_object">Products (Multi Select Stored as Object)</label>
-          <input soho-lookup
-            soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
-            [(ngModel)]="model.multiobject"
-            [columns]="columns_multi"
-            [dataset]="data_product"
-            multiselect
-            [toolbar]="{
+  </div>
+  <div class="row">
+    <div class="six columns">
+      <div class="field">
+        <label soho-label for="product_multi_object">Products (Multi Select Stored as Object)</label>
+        <input soho-lookup soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
+          [(ngModel)]="model.multiobject" [columns]="columns_multi" [dataset]="data_product" multiselect [toolbar]="{
               results: true,
               dateFilter: false,
               keywordFilter: true,
@@ -131,51 +92,16 @@
               rowHeight: false,
               collapsibleFilter: false,
               fullWidth: true
-            }"
-            field="productId"
-            name="product_multi_object" />
-        </div>
-      </div>
-      <div class="six columns">
-        <div class="field">
-          <label soho-label for="product_multi_object_exists">Products (Multi Select Stored as Object) with existing value</label>
-          <input soho-lookup
-            soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
-            [(ngModel)]="model.multiobjectexists"
-            [columns]="columns_multi"
-            [dataset]="data_product"
-            multiselect
-            [toolbar]="{
-              results: true,
-              dateFilter: false,
-              keywordFilter: true,
-              advancedFilter: true,
-              actions: true,
-              views: true,
-              rowHeight: false,
-              collapsibleFilter: false,
-              fullWidth: true
-            }"
-            field="productId"
-            name="product_multi_object_exists" />
-        </div>
+            }" field="productId" name="product_multi_object" />
       </div>
     </div>
-    <div class="row">
-      <div class="six columns">
-        <div class="field">
-          <label soho-label for="product_async">Products (Async Results)</label>
-          <input soho-lookup
-            soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
-            [(ngModel)]="model.async"
-            [columns]="columns_product"
-            [options]="{
-              paging: true,
-              pagesize: 5,
-              pagesizes: [3, 5, 10, 15]
-            }"
-            [source]="source.bind(context)"
-            [toolbar]="{
+    <div class="six columns">
+      <div class="field">
+        <label soho-label for="product_multi_object_exists">Products (Multi Select Stored as Object) with existing
+          value</label>
+        <input soho-lookup soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
+          [(ngModel)]="model.multiobjectexists" [columns]="columns_multi" [dataset]="data_product" multiselect
+          [toolbar]="{
               results: true,
               dateFilter: false,
               keywordFilter: true,
@@ -185,72 +111,20 @@
               rowHeight: false,
               collapsibleFilter: false,
               fullWidth: true
-            }"
-            field="productId"
-            name="product_async"/>
-        </div>
-
-        <div class="field">
-          <label soho-label for="product_before_open">Products (Cancel Before Open)</label>
-          <input soho-lookup
-            [(ngModel)]="model.async"
-            [columns]="columns_product"
-            [options]="{
-              paging: true,
-              pagesize: 5,
-              pagesizes: [3, 5, 10, 15]
-            }"
-            [beforeShow]="onBeforeShow"
-            [toolbar]="{
-              results: true,
-              dateFilter: false,
-              keywordFilter: true,
-              advancedFilter: true,
-              actions: true,
-              views: true,
-              rowHeight: false,
-              collapsibleFilter: false,
-              fullWidth: true
-            }"
-            field="productId"
-            name="product_before_open"/>
-        </div>
-
-        <div class="field">
-          <label soho-label for="toggle-buttons">Enable/Disable Buttons</label>
-          <input soho-lookup
-            #toggleButtons
-            [(ngModel)]="model.single"
-            [columns]="columns_product"
-            [dataset]="data_product"
-            field="productId"
-            title="Products"
-            [buttons]="customButtons"
-            name="toggle-buttons"
-          />
-        </div>
-
-        <button soho-button (click)="toggleModel()">{{showModel ? 'Hide' : 'Show'}} Model</button>
-        <div *ngIf="showModel">
-          <hr>
-          <h3>{{ model | json }}</h3>
-        </div>
-
+            }" field="productId" name="product_multi_object_exists" />
       </div>
-      <div class="six columns">
-        <div class="field">
-          <label soho-label for="product_async_exists">Products (Async Results) with existing value</label>
-          <input soho-lookup
-            soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
-            [(ngModel)]="model.asyncexists"
-            [columns]="columns_product"
-            [options]="{
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      <div class="field">
+        <label soho-label for="product_async">Products (Async Results)</label>
+        <input soho-lookup soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
+          [(ngModel)]="model.async" [columns]="columns_product" [options]="{
               paging: true,
               pagesize: 5,
               pagesizes: [3, 5, 10, 15]
-            }"
-            [source]="source.bind(context)"
-            [toolbar]="{
+            }" [source]="source.bind(context)" [toolbar]="{
               results: true,
               dateFilter: false,
               keywordFilter: true,
@@ -260,38 +134,77 @@
               rowHeight: false,
               collapsibleFilter: false,
               fullWidth: true
-            }"
-            field="productId"
-            name="product_async_exists"/>
-        </div>
-        <div class="field">
-          <label soho-label for="product_custom_match">Custom Matching</label>
-          <input soho-lookup
-            [(ngModel)]="model.single"
-            [field]="onField"
-            [match]="onMatch"
-            [columns]="columns_product"
-            [dataset]="data_product"
-            field="productId"
-            name="product_custom_match" />
-        </div>
+            }" field="productId" name="product_async" />
+      </div>
 
-        <div class="field">
-          <label soho-label for="product_async">Products (Async Results) Multi Select</label>
-          <input soho-lookup
-            soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
-            [(ngModel)]="model.async"
-            [columns]="columns_multi"
-            multiselect
-            [options]="{
+      <div class="field">
+        <label soho-label for="product_before_open">Products (Cancel Before Open)</label>
+        <input soho-lookup [(ngModel)]="model.async" [columns]="columns_product" [options]="{
+              paging: true,
+              pagesize: 5,
+              pagesizes: [3, 5, 10, 15]
+            }" [beforeShow]="onBeforeShow" [toolbar]="{
+              results: true,
+              dateFilter: false,
+              keywordFilter: true,
+              advancedFilter: true,
+              actions: true,
+              views: true,
+              rowHeight: false,
+              collapsibleFilter: false,
+              fullWidth: true
+            }" field="productId" name="product_before_open" />
+      </div>
+
+      <div class="field">
+        <label soho-label for="toggle-buttons">Enable/Disable Buttons</label>
+        <input soho-lookup #toggleButtons [(ngModel)]="model.single" [columns]="columns_product"
+          [dataset]="data_product" field="productId" title="Products" [buttons]="customButtons" name="toggle-buttons" />
+      </div>
+
+      <button soho-button (click)="toggleModel()">{{showModel ? 'Hide' : 'Show'}} Model</button>
+      <div *ngIf="showModel">
+        <hr>
+        <h3>{{ model | json }}</h3>
+      </div>
+
+    </div>
+    <div class="six columns">
+      <div class="field">
+        <label soho-label for="product_async_exists">Products (Async Results) with existing value</label>
+        <input soho-lookup soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
+          [(ngModel)]="model.asyncexists" [columns]="columns_product" [options]="{
+              paging: true,
+              pagesize: 5,
+              pagesizes: [3, 5, 10, 15]
+            }" [source]="source.bind(context)" [toolbar]="{
+              results: true,
+              dateFilter: false,
+              keywordFilter: true,
+              advancedFilter: true,
+              actions: true,
+              views: true,
+              rowHeight: false,
+              collapsibleFilter: false,
+              fullWidth: true
+            }" field="productId" name="product_async_exists" />
+      </div>
+      <div class="field">
+        <label soho-label for="product_custom_match">Custom Matching</label>
+        <input soho-lookup [(ngModel)]="model.single" [field]="onField" [match]="onMatch" [columns]="columns_product"
+          [dataset]="data_product" field="productId" name="product_custom_match" />
+      </div>
+
+      <div class="field">
+        <label soho-label for="product_async">Products (Async Results) Multi Select</label>
+        <input soho-lookup soho-trackdirty (pristine)="onPristine($event)" (dirty)="onDirty($event)"
+          [(ngModel)]="selectedNodeList" [columns]="dataGridColumnsForAppInstance" multiselect [options]="{
               allowSelectAcrossPages: true,
               paging: true,
-              columnIds: ['productId'],
-              pagesize: 5,
-              pagesizes: [3, 5, 10, 15]
-            }"
-            [source]="source.bind(context)"
-            [toolbar]="{
+              columnIds: ['applicationInstanceName'],
+              pagesize: 10,
+              pagesizes: [10, 25, 50, 100]
+            }" [source]="sourceAppInstance.bind(context)" [toolbar]="{
               results: true,
               dateFilter: false,
               keywordFilter: true,
@@ -301,25 +214,35 @@
               rowHeight: false,
               collapsibleFilter: false,
               fullWidth: true
-            }"
-            field="productId"
-            name="product_async_multi"/>
-        </div>
+            }" [field]="fieldNameAppInstance" name="product_async_multi" (change)="onClose()" />
+      </div>
 
-        <div class="field">
-          <label soho-label for="dataset-input">Using Dataset Inputs</label>
-          <input soho-lookup
-            #templateId
-            multiselect
-            id="templateId"
-            field="templateId"
-            name="templateName"
-            [(ngModel)]="entityIds"
-            [dataset]="templates" 
-          />
-        </div>
+      <div class="field">
+        <label soho-label for="dataset-input">Using Dataset Inputs</label>
+        <input soho-lookup #templateId multiselect id="templateId" field="templateId" name="templateName"
+          [(ngModel)]="entityIds"   [dataset]="templates"   />
+      </div>
 
-        </div>
+      <div class="field">
+        <label soho-label for="dataset-input">Soho miltiselect issue</label>
+        <input soho-lookup multiselect name="customLookup" id="text_controlId" #customLookupText class="lookup"
+          type="text" [(ngModel)]="selectedNodeList" [columns]="dataGridColumnsForAppInstance"
+          [source]="sourceAppInstance.bind(context)" [options]="options"
+          [toolbar]="{results: false, keywordFilter: false, rowHeight: false, showFilterRow: true, filterRow: true}"
+          field="{{fieldNameAppInstance}}" asobject (change)="onClose()" title="Soho multiselect issue">
+      </div>
+      <div class="listviewApprova" id="selectedListView" *ngIf="displayNodeList && displayNodeList.length > 0">
+        <soho-listview #simpleSelectListView>
+          <li soho-listview-item *ngFor="let obj of displayNodeList;">
+            <p>{{obj[this.fieldNameAppInstance] }}</p>
+            <div class="l-pull-right">
+              <button soho-button="icon" aos-translate translateTitle="Global_Remove" icon="close" (click)="this.delSelectedTree(obj[this.fieldNameAppInstance])">
+              </button>
+            </div>
+          </li>
+        </soho-listview>
       </div>
     </div>
-</form>
+  </div>
+</div>
+<!-- </form> -->
