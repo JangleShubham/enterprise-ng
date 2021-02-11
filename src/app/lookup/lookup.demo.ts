@@ -339,13 +339,13 @@ export class LookupDemoComponent implements OnInit {
   }
 
   onDirty(event: SohoTrackDirtyEvent) {
-    console.log('lookup.onDirty', event);
-    console.log(this.selectedNodeList);
+    // console.log('lookup.onDirty', event);
+    // console.log(this.selectedNodeList);
   }
 
   onPristine(event: SohoTrackDirtyEvent) {
-    console.log(this.selectedNodeList);
-    console.log('lookup.onPristine', event);
+    // console.log(this.selectedNodeList);
+    // console.log('lookup.onPristine', event);
   }
 
   onChange(event: any) {
