@@ -1,4 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 /**
  * This example:
@@ -20,8 +21,13 @@ export class TabsVerticalDemoComponent {
     return '100%';
   }
 
-  constructor() {
+  formCheckErrorIcon: FormGroup;
+
+  constructor(formBuilder: FormBuilder) {
     console.log('ub');
+    this.formCheckErrorIcon = formBuilder.group({
+      error_icon_check: null,
+    });
   }
 
   onTabActivated(event: SohoTabsEvent) {
