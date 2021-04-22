@@ -18,6 +18,15 @@
 
   <div soho-tab-panel-container [verticalScrolling]="true">
     <div soho-tab-panel tabId="tabs-vertical-contracts">
+      <form [formGroup]="formCheckErrorIcon">
+        <div class="field">
+          <label for="ErrorIconCheck" class="label required">
+            Error Icon Check
+          </label>
+          <input name="ErrorIconCheck" id="ErrorIconCheck" data-validate="required"
+            formControlName="error_icon_check" />
+        </div>
+      </form>
       <h3>Contracts</h3>
       <p>Facilitate cultivate monetize, seize e-services peer-to-peer content integrateAJAX-enabled user-centric strategize. Mindshare; repurpose integrate global addelivery leading-edge frictionless, harness real-time plug-and-play standards-compliant 24/7 enterprise strategize robust infomediaries: functionalities back-end. Killer disintermediate web-enabled ubiquitous empower relationships, solutions, metrics architectures.</p>
     </div>
